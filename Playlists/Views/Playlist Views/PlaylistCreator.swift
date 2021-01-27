@@ -11,30 +11,17 @@ struct PlaylistCreator: View {
     
     //MARK: TODO - Modally Present and Persist Data
     
-    @State private var text = ""
+    @State private var nameText = ""
+    @State private var descriptionText = ""
     @Binding var isShowing: Bool
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
     @State var image: UIImage?
-    
+    @EnvironmentObject var playlistController: PlaylistController
     
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = inputImage
-    }
-    
-    func writePlaylistToDisk() {
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
-        let archiveURL = documentsDirectory.appendingPathComponent("playlists").appendingPathExtension("plist")
-
-        let propertyListEncoder = PropertyListEncoder()
-        
-        let newPlaylist = Playlist(name: text, songs: nil)
-        
-        let encodedPlaylist = try? propertyListEncoder.encode(newPlaylist)
-        
-        try? encodedPlaylist?.write(to: archiveURL, options: .noFileProtection)
     }
     
     var body: some View {
@@ -67,25 +54,31 @@ struct PlaylistCreator: View {
                 }
             }
             
-            TextField("Name", text: $text)
+            TextField("Name", text: $nameText)
                 .multilineTextAlignment(.center)
 //                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+            
+            TextField("Description", text: $descriptionText)
+                .multilineTextAlignment(.center)
             
             NavigationLink(destination: PlaylistsView()) {
+                
+                //disable if text fields are empty
                 Button(action: {
                                         
-                    writePlaylistToDisk()
+                    playlistController.items.append(Playlist(name: nameText, description: descriptionText == "" ? nil : descriptionText, songs: [Song(id: "", type: "", attributes: Attributes(albumName: "Blue Album", artistName: "Weezer", artwork: Artwork(height: 100, width: 100, url: ""), name: "Say It Ain't So", url: nil, durationInMillis: 259000))], image: image?.pngData()))
                     isShowing = false
                     
                 }) {
                     Text("Done")
                         .foregroundColor(.blue)
                 }
+                
             }
         }.sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: $inputImage)
         }
+        .scaleEffect(CGSize(width: 1.0, height: 1.0))
         
         
     }
@@ -96,6 +89,6 @@ struct PlaylistCreator: View {
 
 //struct PlaylistCreator_Previews: PreviewProvider {
 //    static var previews: some View {
-//        PlaylistCreator()
+//        PlaylistCreator().environmentObject(PlaylistController())
 //    }
 //}

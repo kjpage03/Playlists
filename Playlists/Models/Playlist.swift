@@ -13,8 +13,10 @@ struct Playlist: Identifiable, Codable {
 
     var id = UUID()
     var name: String
+    var description: String?
     var songs: [Song]?
     var image: Data?
+    
     
     //Test Data
     static var sampleImage = UIImage(named: "AMV1")!
@@ -25,25 +27,67 @@ struct Playlist: Identifiable, Codable {
 }
 
 
-class Playlists {
+//class Playlists {
+//
+//    var items: [Playlist] {
+//
+//        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//
+//        let archiveURL = documentsDirectory.appendingPathComponent("playlists").appendingPathExtension("plist")
+//
+//        let propertyListDecoder = PropertyListDecoder()
+//
+//        //pull playlist data from disk
+//
+//        if let retrievedPlaylists = try? Data(contentsOf: archiveURL), let decodedPlaylists = try? propertyListDecoder.decode([Playlist].self, from: retrievedPlaylists) {
+//            return decodedPlaylists
+//        } else {
+//            return [Playlist.testPlaylist]
+//        }
+//
+//
+//    }
+//}
+
+class PlaylistController: ObservableObject {
     
-    var items: [Playlist] {
+    
+    @Published var items: [Playlist] {
+        didSet {
+            //every time this array is changed, write the new array to disk
+            
+            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
-        let archiveURL = documentsDirectory.appendingPathComponent("playlists").appendingPathExtension("plist")
+            let archiveURL = documentsDirectory.appendingPathComponent("playlists").appendingPathExtension("plist")
 
-        let propertyListDecoder = PropertyListDecoder()
+            let propertyListEncoder = PropertyListEncoder()
 
-        //pull playlist data from disk
-
-        if let retrievedPlaylists = try? Data(contentsOf: archiveURL), let decodedPlaylists = try? propertyListDecoder.decode([Playlist].self, from: retrievedPlaylists) {
-            return decodedPlaylists
-        } else {
-            return [Playlist.testPlaylist]
+            let encodedItems = try? propertyListEncoder.encode(items)
+            
+            try? encodedItems?.write(to: archiveURL, options: .noFileProtection)
         }
-        
-        
     }
+    
+    //when initialized, decode items from disk into item array
+    
+    init(){
+        
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
+        let archiveURL = documentsDirectory.appendingPathComponent("playlists").appendingPathExtension("plist")
+        
+        let propertyListDecoder = PropertyListDecoder()
+        
+        if let retrievedData = try? Data(contentsOf: archiveURL) {
+            if let decodedItems = try? propertyListDecoder.decode([Playlist].self, from: retrievedData) {
+                self.items = decodedItems
+            } else {
+                self.items = []
+            }
+        } else {
+            self.items = []
+        }
+
+    }
+    
 }

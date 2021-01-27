@@ -17,6 +17,8 @@
 		1E64613025A4EFB80073FED1 /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64612F25A4EFB80073FED1 /* SetupView.swift */; };
 		1E64613525A4FB940073FED1 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64613425A4FB940073FED1 /* PlayView.swift */; };
 		1E758D0025B9D99E005FFCF8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E758CFF25B9D99E005FFCF8 /* ImagePicker.swift */; };
+		1E758D2825BF2D22005FFCF8 /* PlaylistEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E758D2725BF2D22005FFCF8 /* PlaylistEditor.swift */; };
+		1E758D3425C08197005FFCF8 /* PlaylistControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E758D3325C08197005FFCF8 /* PlaylistControls.swift */; };
 		1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */; };
 		1EC0D97225905F0400C4A3F6 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */; };
 		1EC0D97725905F2400C4A3F6 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97625905F2400C4A3F6 /* Playlist.swift */; };
@@ -34,7 +36,7 @@
 		1EF48564258BAAA50042F940 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EF48563258BAAA50042F940 /* Preview Assets.xcassets */; };
 		1EF4856F258BAAA50042F940 /* PlaylistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4856E258BAAA50042F940 /* PlaylistsTests.swift */; };
 		1EF4857A258BAAA50042F940 /* PlaylistsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF48579258BAAA50042F940 /* PlaylistsUITests.swift */; };
-		1EF4858B258BAEBB0042F940 /* PBControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4858A258BAEBB0042F940 /* PBControls.swift */; };
+		1EF4858B258BAEBB0042F940 /* PlaybackCtrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF4858A258BAEBB0042F940 /* PlaybackCtrls.swift */; };
 		1EF485F7258BBDBC0042F940 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF485F6258BBDBC0042F940 /* TableView.swift */; };
 		1EF485FC258BC0200042F940 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF485FB258BC0200042F940 /* SearchView.swift */; };
 		1EF48601258BC07F0042F940 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF48600258BC07F0042F940 /* SearchViewController.swift */; };
@@ -71,6 +73,8 @@
 		1E64612F25A4EFB80073FED1 /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		1E64613425A4FB940073FED1 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		1E758CFF25B9D99E005FFCF8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		1E758D2725BF2D22005FFCF8 /* PlaylistEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistEditor.swift; path = "../../../../Playlists 2/Playlists/UIKit/PlaylistEditor.swift"; sourceTree = "<group>"; };
+		1E758D3325C08197005FFCF8 /* PlaylistControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistControls.swift; sourceTree = "<group>"; };
 		1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		1EC0D97625905F2400C4A3F6 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
@@ -93,7 +97,7 @@
 		1EF48575258BAAA50042F940 /* PlaylistsProjectlaylistsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaylistsProjectlaylistsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF48579258BAAA50042F940 /* PlaylistsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsUITests.swift; sourceTree = "<group>"; };
 		1EF4857B258BAAA50042F940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1EF4858A258BAEBB0042F940 /* PBControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBControls.swift; sourceTree = "<group>"; };
+		1EF4858A258BAEBB0042F940 /* PlaybackCtrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackCtrls.swift; sourceTree = "<group>"; };
 		1EF485F6258BBDBC0042F940 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		1EF485FB258BC0200042F940 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		1EF48600258BC07F0042F940 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -133,8 +137,10 @@
 			children = (
 				1EC0D9802599A5A800C4A3F6 /* PlaylistsView.swift */,
 				1EC0D98D2599AB7800C4A3F6 /* PlaylistCreator.swift */,
+				1E758D2725BF2D22005FFCF8 /* PlaylistEditor.swift */,
 				1EC0D9852599A63B00C4A3F6 /* PlaylistRow.swift */,
 				1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */,
+				1E758D3325C08197005FFCF8 /* PlaylistControls.swift */,
 			);
 			path = "Playlist Views";
 			sourceTree = "<group>";
@@ -143,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				1E5901D625B0AB2D00580162 /* MusicController.swift */,
-				1EF4858A258BAEBB0042F940 /* PBControls.swift */,
+				1EF4858A258BAEBB0042F940 /* PlaybackCtrls.swift */,
 				1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */,
 				1EF485FB258BC0200042F940 /* SearchView.swift */,
 				1EC0D97B25906FA300C4A3F6 /* SongRow.swift */,
@@ -159,8 +165,8 @@
 		1EC0D956258D169800C4A3F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1EF48605258BC0950042F940 /* Song.swift */,
 				1EC0D97625905F2400C4A3F6 /* Playlist.swift */,
+				1EF48605258BC0950042F940 /* Song.swift */,
 				1EC0D9BA259E58B500C4A3F6 /* JSONObjects.swift */,
 				1EC0D9AF259BA8AA00C4A3F6 /* Token.swift */,
 			);
@@ -390,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EC0D9812599A5A800C4A3F6 /* PlaylistsView.swift in Sources */,
+				1E758D3425C08197005FFCF8 /* PlaylistControls.swift in Sources */,
 				1EF48606258BC0950042F940 /* Song.swift in Sources */,
 				1EC0D97C25906FA300C4A3F6 /* SongRow.swift in Sources */,
 				1EC0D97725905F2400C4A3F6 /* Playlist.swift in Sources */,
@@ -404,6 +411,7 @@
 				1E5901C925AF604100580162 /* VolumeSlider.swift in Sources */,
 				1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */,
 				1E5901D725B0AB2D00580162 /* MusicController.swift in Sources */,
+				1E758D2825BF2D22005FFCF8 /* PlaylistEditor.swift in Sources */,
 				1E64610B25A3795C0073FED1 /* ImageView.swift in Sources */,
 				1E758D0025B9D99E005FFCF8 /* ImagePicker.swift in Sources */,
 				1EC0D98E2599AB7800C4A3F6 /* PlaylistCreator.swift in Sources */,
@@ -415,7 +423,7 @@
 				1EF485F7258BBDBC0042F940 /* TableView.swift in Sources */,
 				1E25C8A925A60762005DA2E1 /* Cache.swift in Sources */,
 				1EF4855D258BAAA40042F940 /* PlaylistsApp.swift in Sources */,
-				1EF4858B258BAEBB0042F940 /* PBControls.swift in Sources */,
+				1EF4858B258BAEBB0042F940 /* PlaybackCtrls.swift in Sources */,
 				1E64613025A4EFB80073FED1 /* SetupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

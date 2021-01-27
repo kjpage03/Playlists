@@ -19,19 +19,7 @@ struct PlayView: View {
     @State var isPlaying: Bool = false
     @State var didSkip: Bool = false
     @State var didBack: Bool = false
-    
-    var song: Song? {
-        didSet {
-            controller.items.insert(song!, at: 0)
-            print(controller.items)
-        }
-    }
-    
-    init(song: Song?){
-        if let newSong = song {
-            self.song = newSong
-        }
-    }
+    @State var showQueue: Bool = false
     
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
             
@@ -75,6 +63,8 @@ struct PlayView: View {
     
     var body: some View {
         
+        //MARK: Custom Bindings
+        
         let isPaused = Binding<Bool>(
         get: {
             self.isPlaying
@@ -94,10 +84,9 @@ struct PlayView: View {
             if self.didSkip {
                 
 //                controller.musicPlayer.currentPlaybackTime = TimeInterval(controller.currentSong.attributes.durationInMillis/1000)
-                controller.musicPlayer.skipToNextItem()
-
-                self.didSkip = false
                 
+                controller.musicPlayer.skipToNextItem()
+                self.didSkip = false
             }
         }
         
@@ -133,11 +122,11 @@ struct PlayView: View {
                     }
                 )
         
+        //MARK: View
             
         NavigationView() {
             
             VStack(alignment: .center, spacing: 20) {
-                
                 
                 ImageView(withURL: controller.currentSong.attributes.artwork.url, height: controller.currentSong.attributes.artwork.height, width: controller.currentSong.attributes.artwork.width, frameHeight: 290, frameWidth: 290)
                     //.clipShape(Circle())
@@ -169,7 +158,6 @@ struct PlayView: View {
                 }
                 .offset(x: 0, y: -30)
                 
-                
                 VStack(alignment: .center, spacing: 5) {
                     VStack(alignment: .center, spacing: 5) {
                         Text(controller.currentSong.attributes.name)
@@ -183,31 +171,36 @@ struct PlayView: View {
                     PlayControl(isPaused: isPaused, didSkip: skipped, didGoBack: didGoBack)
                         //.offset(x: 0, y: -50)
                         .offset(x: 0, y: 0)
-                        
-                    
-                    
                 }
                 .offset(x: 0, y: -60)
+                
+//                Button(action: {
+//                showQueue = true
+//                }, label: {
+//                    Image(systemName: "music.note.list")
+//                        .foregroundColor(.black)
+//                        .scaleEffect(CGSize(width: 2.0, height: 2.0))
+//                })
                 
                     .navigationBarItems(
                     
                     leading:
                         
-                    NavigationLink(destination: SearchView(songs: nil)) {
+                    NavigationLink(destination: SearchView(songs: nil, backButtonHidden: false)) {
                        Image("Search")
                         .scaleEffect(CGSize(width: 0.2, height: 0.2))
                         .frame(width: 50, height: 50, alignment: .center)},
                         
                     trailing:
                     
-                        
                         NavigationLink(destination: PlaylistsView()) {
                             Image("List")
                             .scaleEffect(CGSize(width: 0.09, height: 0.09))
                                 .frame(width: 50, height: 50, alignment: .center)
                     })
             }
-            .offset(x: 0, y: -60)
+            .offset(x: 0, y: -55)
+            //increases, down; decreases, up
                 
         }
         .navigationBarBackButtonHidden(true)
@@ -216,8 +209,9 @@ struct PlayView: View {
 }
 
 struct PlayView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        PlayView(song: nil)
+        PlayView()
     }
 }
 

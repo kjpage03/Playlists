@@ -14,6 +14,8 @@ struct SearchView: View {
     @State var songs: [Song]?
     @State var showNext: Bool = false
     @State var showOptions: Bool = false
+    @State var selection: String? = nil
+    var backButtonHidden: Bool
     //@State var nextClicked: Bool = false
     
     @EnvironmentObject var controller: MusicController
@@ -29,23 +31,28 @@ struct SearchView: View {
                     
                     ForEach(songs ?? [Song]()) { song in
                         ZStack {
+
                             SongRow(song: song)
-                            NavigationLink(destination: LazyView(PlayView(song: song))) {
-                                    EmptyView()
-                                        
+                                .padding(5)
+                                .onTapGesture {
+                                    self.controller.items.removeAll()
+                                    self.controller.items.insert(song, at: 0)
+                                    self.controller.musicPlayer.stop()
+                                    self.controller.musicPlayer.prepareToPlay()
+                                    self.controller.musicPlayer.play()
+                                    self.selection = song.id
                                 }
-                            .onTapGesture {
-                                print("Navigation link tapped")
-                                controller.items.insert(song, at: 0)
-                                print(controller.items)
+                            
+                            NavigationLink(destination: PlayView(), tag: song.id,selection: $selection) {
+//                                SongRow(song: song)
+//                                    .padding(5)
+                                EmptyView()
                             }
                                 .opacity(0)
                                 .buttonStyle(PlainButtonStyle())
                                 
                         }
                     }
-                        
-                    
                     
                     //if showNext {
                         /*HStack {
@@ -66,17 +73,17 @@ struct SearchView: View {
             
         }
         .navigationBarTitle("Search", displayMode: .inline)
+        .navigationBarBackButtonHidden(backButtonHidden)
     }
     
     
 }
 
-struct SearchView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        SearchView(songs: [Playlist.testSong])
-    }
-}
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchView(songs: [Playlist.testSong])
+//    }
+//}
 
 struct LazyView<Content: View>: View {
     let build: () -> Content

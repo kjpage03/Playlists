@@ -10,21 +10,36 @@ import SwiftUI
 struct PlaylistRow: View {
     
     var playlist: Playlist
-    @State var image = UIImage()
     
     var body: some View {
         VStack {
-            NavigationLink(destination: PlaylistView(playlist: playlist)) {
+            
+            if let playlistImage = UIImage(data: playlist.image ?? Data()) {
                 
-                    Image("gray-square")
+                NavigationLink(destination: PlaylistView(playlist: playlist)) {
+                    Image(uiImage: playlistImage)
+                        .resizable()
                         .frame(width: 140, height: 140)
-                        .scaleEffect(CGSize(width: 0.2, height: 0.2))
+                        .aspectRatio(contentMode: .fit)
                         .clipShape(Circle())
                         .shadow(radius: 5)
                         .overlay(Circle().stroke(Color.black, lineWidth: 0.5))
+
+                }
                 
+                } else {
+                    
+                    NavigationLink(destination: PlaylistView(playlist: playlist)) {
+                        Image("gray-square")
+                            .frame(width: 140, height: 140)
+                            .scaleEffect(CGSize(width: 0.2, height: 0.2))
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                            .overlay(Circle().stroke(Color.black, lineWidth: 0.5))
+                    }
+                }
                 
-            }
+            
             Text(playlist.name)
                 
         }
