@@ -8,31 +8,20 @@
 import SwiftUI
 import UIKit
 import Combine
-
+import MediaPlayer
 
 
 struct SongRow: View {
     
-//    @Binding var optionsShowing: Bool
-    
+    @State var showOptions = false
     @EnvironmentObject var controller: MusicController
     
     var song: Song
     
     var body: some View {
+        
+        VStack {
     
-        //ellipsis
-        ZStack {
-            HStack{
-                Spacer()
-                
-//                if optionsShowing {
-//                    Options()
-//                        .offset(x: -30, y: -80)
-//                }
-            }
-            
-            
         HStack {
             
             ImageView(withURL: song.attributes.artwork.url, height: song.attributes.artwork.height, width: song.attributes.artwork.width, frameHeight: 50, frameWidth: 50)
@@ -47,28 +36,41 @@ struct SongRow: View {
             }
             
             Spacer()
-            
+                
             Button(action: {
                 //Back
 //                withAnimation(.easeInOut) {
 //                    optionsShowing.toggle()
 //                }
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    showOptions.toggle()
+
+                }
             }) {
                 
-                Image(systemName: "plus")
-                    .scaleEffect(CGSize(width: 1.2, height: 1.2))
-                    .rotationEffect(.degrees(90))
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.gray)
+                    .imageScale(.medium)
+                    .rotationEffect(.degrees(showOptions ? 270 : 0))
                     .animation(.easeInOut)
-                    
                     
                 }
             .frame(width: 40, height: 50, alignment: .center)
             .onTapGesture {
-                controller.items.append(song)
-                controller.refreshMusicPlayer()
-                print("NEW QUEUE: \(controller.items)")
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    showOptions.toggle()
+
+                }
+                
+//                controller.items.append(song)
+//                controller.refreshMusicPlayer()
+//                print("NEW QUEUE: \(controller.items)")
             }
             
+            
+            }
+            if showOptions {
+                OptionsView(song: song)
             }
         }
     }

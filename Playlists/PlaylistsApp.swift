@@ -17,7 +17,7 @@ struct PlaylistsApp: App {
     @State var hasSubscription = Bool()
     @ObservedObject var controller = MusicController()
     @ObservedObject var playlistController = PlaylistController()
-
+    @ObservedObject var searches = RecentSearches()
     
 //    var queue = Queue()
     
@@ -33,6 +33,7 @@ struct PlaylistsApp: App {
             
             PlayView().environmentObject(controller)
                 .environmentObject(playlistController)
+                .environmentObject(searches)
 
             
             /*PlayView(hasSub: $hasSubscription)

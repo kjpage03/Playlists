@@ -15,23 +15,31 @@ struct SearchView: View {
     @State var showNext: Bool = false
     @State var showOptions: Bool = false
     @State var selection: String? = nil
+    @State var listShowing = false
     var backButtonHidden: Bool
     //@State var nextClicked: Bool = false
     
     @EnvironmentObject var controller: MusicController
+    @EnvironmentObject var searches: RecentSearches
     
     let player = MPMusicPlayerController.applicationQueuePlayer
     
     var body: some View {
         
         VStack {
-            SearchBar(songs: $songs)
-                
+            SearchBar(songs: $songs, listShowing: $listShowing)
+            
+            if searches.items.count > 0 && !listShowing {
+                RecentSearchesView(songs: $songs, listShowing: $listShowing)
+            } else {
+                Spacer()
+            }
+            
+            if listShowing {
                 List {
-                    
                     ForEach(songs ?? [Song]()) { song in
                         ZStack {
-
+                            
                             SongRow(song: song)
                                 .padding(5)
                                 .onTapGesture {
@@ -44,31 +52,34 @@ struct SearchView: View {
                                 }
                             
                             NavigationLink(destination: PlayView(), tag: song.id,selection: $selection) {
-//                                SongRow(song: song)
-//                                    .padding(5)
+                                //SongRow(song: song)
+                                //.padding(5)
                                 EmptyView()
                             }
-                                .opacity(0)
-                                .buttonStyle(PlainButtonStyle())
-                                
+                            .opacity(0)
+                            .buttonStyle(PlainButtonStyle())
+                            
                         }
                     }
                     
                     //if showNext {
-                        /*HStack {
-                            Spacer()
-                            Button(action: {
-                                //nextClicked = true
-                            }, label: {
-                                Next()
-                            })
-                            .frame(width: 100, height: 100, alignment: .center)
-                            
-                            Spacer()
-                        }*/
+                    /*HStack {
+                     Spacer()
+                     Button(action: {
+                     //nextClicked = true
+                     }, label: {
+                     Next()
+                     })
+                     .frame(width: 100, height: 100, alignment: .center)
+                     
+                     Spacer()
+                     }*/
                     //}
-                        
+                    
                 }
+                
+            }
+            
             
             
         }

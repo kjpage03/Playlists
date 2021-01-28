@@ -19,6 +19,10 @@
 		1E758D0025B9D99E005FFCF8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E758CFF25B9D99E005FFCF8 /* ImagePicker.swift */; };
 		1E758D2825BF2D22005FFCF8 /* PlaylistEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E758D2725BF2D22005FFCF8 /* PlaylistEditor.swift */; };
 		1E758D3425C08197005FFCF8 /* PlaylistControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E758D3325C08197005FFCF8 /* PlaylistControls.swift */; };
+		1E85D1E925C1CF9600015921 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D1E825C1CF9600015921 /* OptionsView.swift */; };
+		1E85D1FF25C226A600015921 /* Searches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D1FE25C226A600015921 /* Searches.swift */; };
+		1E85D20425C2283200015921 /* RecentSearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D20325C2283200015921 /* RecentSearchesView.swift */; };
+		1E85D20F25C23D0600015921 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D20E25C23D0600015921 /* SearchController.swift */; };
 		1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */; };
 		1EC0D97225905F0400C4A3F6 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */; };
 		1EC0D97725905F2400C4A3F6 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97625905F2400C4A3F6 /* Playlist.swift */; };
@@ -75,6 +79,10 @@
 		1E758CFF25B9D99E005FFCF8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1E758D2725BF2D22005FFCF8 /* PlaylistEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistEditor.swift; path = "../../../../Playlists 2/Playlists/UIKit/PlaylistEditor.swift"; sourceTree = "<group>"; };
 		1E758D3325C08197005FFCF8 /* PlaylistControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistControls.swift; sourceTree = "<group>"; };
+		1E85D1E825C1CF9600015921 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		1E85D1FE25C226A600015921 /* Searches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searches.swift; sourceTree = "<group>"; };
+		1E85D20325C2283200015921 /* RecentSearchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesView.swift; sourceTree = "<group>"; };
+		1E85D20E25C23D0600015921 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		1EC0D97625905F2400C4A3F6 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
@@ -145,19 +153,31 @@
 			path = "Playlist Views";
 			sourceTree = "<group>";
 		};
+		1E85D22725C30E6B00015921 /* Searching Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				1EF485FB258BC0200042F940 /* SearchView.swift */,
+				1E85D20325C2283200015921 /* RecentSearchesView.swift */,
+				1EF48619258BC8380042F940 /* SearchBar.swift */,
+				1E85D20E25C23D0600015921 /* SearchController.swift */,
+				1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */,
+				1E85D1FE25C226A600015921 /* Searches.swift */,
+			);
+			path = "Searching Stuff";
+			sourceTree = "<group>";
+		};
 		1EC0D952258D168B00C4A3F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				1E5901D625B0AB2D00580162 /* MusicController.swift */,
+				1E85D1E825C1CF9600015921 /* OptionsView.swift */,
 				1EF4858A258BAEBB0042F940 /* PlaybackCtrls.swift */,
-				1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */,
-				1EF485FB258BC0200042F940 /* SearchView.swift */,
 				1EC0D97B25906FA300C4A3F6 /* SongRow.swift */,
 				1E6460F625A1404D0073FED1 /* ImageLoader.swift */,
 				1E64610A25A3795C0073FED1 /* ImageView.swift */,
-				1EF48619258BC8380042F940 /* SearchBar.swift */,
 				1E5CA9D425A8B116000778F4 /* Next.swift */,
 				1E758D0E25BA585D005FFCF8 /* Playlist Views */,
+				1E85D22725C30E6B00015921 /* Searching Stuff */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,8 +425,10 @@
 				1E64612B25A4EEC30073FED1 /* SetupViewController.swift in Sources */,
 				1EF485FC258BC0200042F940 /* SearchView.swift in Sources */,
 				1EC0D9862599A63B00C4A3F6 /* PlaylistRow.swift in Sources */,
+				1E85D20425C2283200015921 /* RecentSearchesView.swift in Sources */,
 				1EF4855F258BAAA40042F940 /* SubscriptionCheck.swift in Sources */,
 				1EF4860B258BC0BE0042F940 /* SongTableViewCell.swift in Sources */,
+				1E85D1E925C1CF9600015921 /* OptionsView.swift in Sources */,
 				1EC0D9B0259BA8AA00C4A3F6 /* Token.swift in Sources */,
 				1E5901C925AF604100580162 /* VolumeSlider.swift in Sources */,
 				1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */,
@@ -420,10 +442,12 @@
 				1E64613525A4FB940073FED1 /* PlayView.swift in Sources */,
 				1E6460F725A1404D0073FED1 /* ImageLoader.swift in Sources */,
 				1E5CA9D525A8B116000778F4 /* Next.swift in Sources */,
+				1E85D20F25C23D0600015921 /* SearchController.swift in Sources */,
 				1EF485F7258BBDBC0042F940 /* TableView.swift in Sources */,
 				1E25C8A925A60762005DA2E1 /* Cache.swift in Sources */,
 				1EF4855D258BAAA40042F940 /* PlaylistsApp.swift in Sources */,
 				1EF4858B258BAEBB0042F940 /* PlaybackCtrls.swift in Sources */,
+				1E85D1FF25C226A600015921 /* Searches.swift in Sources */,
 				1E64613025A4EFB80073FED1 /* SetupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

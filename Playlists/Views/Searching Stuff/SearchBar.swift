@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-
 struct SearchBar: UIViewRepresentable {
     
     @Binding var songs: [Song]?
+    @Binding var listShowing: Bool
     //@Binding var showMore: Bool
-
+    @EnvironmentObject var searches: RecentSearches
     @State var myResponse: Results?
     
     func nextButtonClicked() {
@@ -45,8 +45,6 @@ struct SearchBar: UIViewRepresentable {
         
     }
     
-    
-    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -75,49 +73,21 @@ struct SearchBar: UIViewRepresentable {
                         
             guard let text = searchBar.text else { return }
             
-            let searchTerm  = text.lowercased()
-            let countryCode = "us"
-
-            var components = URLComponents()
-            components.scheme = "https"
-            components.host   = "api.music.apple.com"
-            components.path   = "/v1/catalog/\(countryCode)/search"
-                    
-            components.queryItems = [
-                URLQueryItem(name: "term", value: searchTerm),
-                URLQueryItem(name: "limit", value: "25"),
-                URLQueryItem(name: "types", value: "songs"),
-            ]
-
-            let url = components.url!
-            
-            var request = URLRequest(url: url)
-            request.setValue("Bearer \(signedJWT)", forHTTPHeaderField: "Authorization")
-            
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                let jsonDecoder = JSONDecoder()
+            let searchController = SearchController()
+            searchController.search(term: text) { (songs) in
                 
-                if let data = data {
-                    
-                    //print(data)
-//                    let string = String(data: data, encoding: .utf8)
-//                    print(string ?? "")
-                    
-                    if let response = try? jsonDecoder.decode(ResponseRoot.self, from: data) {
-                        //self.parent.songs = response.results.songs.data
-                        /*print(response.results.songs.href)
-                        print(response.results.songs.next)
-                        print(response.results.songs.data.first?.type)
-                        print(response.results.songs.data.first?.id)
-                        print(response.results.songs.data.first?.attributes)*/
-                        self.parent.songs = response.results.songs.data
+                DispatchQueue.main.async {
+                    withAnimation(.easeIn(duration: 0.5)) {
+                        self.parent.songs = songs
+                        self.parent.listShowing = true
+                        self.parent.searches.items.append(Search(name: text))
+                        searchBar.endEditing(true)
                     }
                     
                 }
+                //self.parent.showMore = true
             }
-            task.resume()
-            searchBar.endEditing(true)
-            //self.parent.showMore = true
+            
         }
         
     }

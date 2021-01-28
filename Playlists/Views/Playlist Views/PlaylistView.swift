@@ -12,39 +12,71 @@ struct PlaylistView: View {
     var playlist: Playlist
     @EnvironmentObject var playlistController: PlaylistController
     @State var editShowing = false
+    var defaultImage = UIImage(named: "gray-square")
     
     var body: some View {
-                
-//            if let description = playlist.description {
-//                Text(description)
-//            }
+        
+        VStack {
             
-            VStack {
-                
-                
-                HStack() {
+            HStack() {
+                Spacer()
+                if let image = playlist.image {
+                    
+                    Image(uiImage: (UIImage(data: image) ?? defaultImage!))
+                        .resizable()
+                        .frame(width: 115, height: 115)
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(Circle())
+                        .offset(x: 0, y: 15)
+                }
+            }.frame(width: 350, height: 0)
+            
+            HStack() {
+                if let description = playlist.description {
+                    VStack {
+                        Text(description)
+                        PlaylistControls()
+                            .padding()
+                    }
+                } else {
                     PlaylistControls()
                         .padding()
-                    Spacer()
                 }
                 
-                if let songs = playlist.songs {
-                    List(songs) { song in
+                Spacer()
+                //                        if let image = playlist.image {
+                //
+                //                                Image(uiImage: (UIImage(data: image) ?? defaultImage!))
+                //                                    .resizable()
+                //                                    .frame(width: 150, height: 150)
+                //                                    .aspectRatio(contentMode: .fit)
+                //                                    .clipShape(Circle())
+                //
+                //                        }
+            }
+            
+            
+            if let songs = playlist.songs {
+                ScrollView {
+                    ForEach(songs) { song in
                         SongRow(song: song)
-                    }
-
-                    .navigationBarTitle(playlist.name, displayMode: .large)
-                    .navigationBarItems(trailing: Button(action: {
-                        print("Edit icon pressed...")
-                        editShowing = true
-                    }) {
-                        Image(systemName: "pencil").imageScale(.large)
+                    }.onDelete(perform: { indexSet in
+                        print("")
                     })
-                    .sheet(isPresented: $editShowing, content: {
-                        PlaylistEditor(playlist: playlist, editShowing: $editShowing)
-                    })
-
-                } else {
+                }
+                
+                .navigationBarTitle(playlist.name, displayMode: .large)
+                .navigationBarItems(trailing: Button(action: {
+                    print("Edit icon pressed...")
+                    editShowing = true
+                }) {
+                    Image(systemName: "pencil").imageScale(.large)
+                })
+                .sheet(isPresented: $editShowing, content: {
+                    PlaylistEditor(playlist: playlist, editShowing: $editShowing)
+                })
+                
+            } else {
                 
                 VStack(spacing: 8) {
                     
@@ -54,7 +86,7 @@ struct PlaylistView: View {
                             .scaleEffect(CGSize(width: 3, height: 3))
                             .foregroundColor(.blue)
                     }
-
+                    
                     Text("Add Songs")
                         .fontWeight(.light)
                 }
@@ -69,8 +101,8 @@ struct PlaylistView: View {
                     PlaylistEditor(playlist: playlist, editShowing: $editShowing)
                 })
                 
-                }
-                
+            }
+            
         }
         
     }

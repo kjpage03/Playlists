@@ -22,13 +22,13 @@ struct PlayView: View {
     @State var showQueue: Bool = false
     
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
-            
+    
     @EnvironmentObject var controller: MusicController
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
-        
+    
     func updateElapsedTime() {
         self.currentTime = controller.musicPlayer.currentPlaybackTime
         
@@ -66,16 +66,16 @@ struct PlayView: View {
         //MARK: Custom Bindings
         
         let isPaused = Binding<Bool>(
-        get: {
-            self.isPlaying
-        }, set: {
-            self.isPlaying = $0
-            if self.isPlaying {
-                self.controller.musicPlayer.stop()
-            } else {
-                self.controller.musicPlayer.play()
-            }
-        })
+            get: {
+                self.isPlaying
+            }, set: {
+                self.isPlaying = $0
+                if self.isPlaying {
+                    self.controller.musicPlayer.stop()
+                } else {
+                    self.controller.musicPlayer.play()
+                }
+            })
         
         let skipped = Binding<Bool> { () -> Bool in
             self.didSkip
@@ -83,7 +83,7 @@ struct PlayView: View {
             self.didSkip = $0
             if self.didSkip {
                 
-//                controller.musicPlayer.currentPlaybackTime = TimeInterval(controller.currentSong.attributes.durationInMillis/1000)
+                //                controller.musicPlayer.currentPlaybackTime = TimeInterval(controller.currentSong.attributes.durationInMillis/1000)
                 
                 controller.musicPlayer.skipToNextItem()
                 self.didSkip = false
@@ -105,25 +105,25 @@ struct PlayView: View {
                 
             }
         }
-
+        
         let time = Binding<Double>(
-                    get: {
-                        self.currentTime
-                    },
-                    set: {
-                        self.currentTime = $0
-
-                        controller.musicPlayer.stop()
-                        controller.musicPlayer.currentPlaybackTime = self.currentTime
-                        controller.musicPlayer.prepareToPlay()
-                        if !self.isPlaying {
-                            controller.musicPlayer.play()
-                        }
-                    }
-                )
+            get: {
+                self.currentTime
+            },
+            set: {
+                self.currentTime = $0
+                
+                controller.musicPlayer.stop()
+                controller.musicPlayer.currentPlaybackTime = self.currentTime
+                controller.musicPlayer.prepareToPlay()
+                if !self.isPlaying {
+                    controller.musicPlayer.play()
+                }
+            }
+        )
         
         //MARK: View
-            
+        
         NavigationView() {
             
             VStack(alignment: .center, spacing: 20) {
@@ -132,29 +132,29 @@ struct PlayView: View {
                     //.clipShape(Circle())
                     .shadow(radius: 10)
                     .offset(x: 0, y: -5)
-                    
+                
                 Slider(value: time, in: 0...Double(controller.currentSong.attributes.durationInMillis/1000), step: 1)
                     .accentColor(.red)
                     .padding(.leading)
                     .padding(.trailing)
-
+                
                 HStack {
                     Text("\(timeElapsed)")
                         .fontWeight(.light)
                         .padding()
                         .onReceive(timer, perform: { _ in
-
+                            
                             updateElapsedTime()
-                    
+                            
                             updateRemainingTime()
                             
                         })
-                        
+                    
                     Spacer()
                     Text("\(timeRemaining)")
                         .fontWeight(.light)
                         .padding()
-                                        
+                    
                 }
                 .offset(x: 0, y: -30)
                 
@@ -174,34 +174,34 @@ struct PlayView: View {
                 }
                 .offset(x: 0, y: -60)
                 
-//                Button(action: {
-//                showQueue = true
-//                }, label: {
-//                    Image(systemName: "music.note.list")
-//                        .foregroundColor(.black)
-//                        .scaleEffect(CGSize(width: 2.0, height: 2.0))
-//                })
+                //                Button(action: {
+                //                showQueue = true
+                //                }, label: {
+                //                    Image(systemName: "music.note.list")
+                //                        .foregroundColor(.black)
+                //                        .scaleEffect(CGSize(width: 2.0, height: 2.0))
+                //                })
                 
-                    .navigationBarItems(
+                .navigationBarItems(
                     
                     leading:
                         
-                    NavigationLink(destination: SearchView(songs: nil, backButtonHidden: false)) {
-                       Image("Search")
-                        .scaleEffect(CGSize(width: 0.2, height: 0.2))
-                        .frame(width: 50, height: 50, alignment: .center)},
-                        
-                    trailing:
+                        NavigationLink(destination: SearchView(songs: nil, backButtonHidden: false)) {
+                            Image("Search")
+                                .scaleEffect(CGSize(width: 0.2, height: 0.2))
+                                .frame(width: 50, height: 50, alignment: .center)},
                     
+                    trailing:
+                        
                         NavigationLink(destination: PlaylistsView()) {
                             Image("List")
-                            .scaleEffect(CGSize(width: 0.09, height: 0.09))
+                                .scaleEffect(CGSize(width: 0.09, height: 0.09))
                                 .frame(width: 50, height: 50, alignment: .center)
-                    })
+                        })
             }
             .offset(x: 0, y: -55)
             //increases, down; decreases, up
-                
+            
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
