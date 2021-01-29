@@ -160,9 +160,18 @@ struct PlayView: View {
                 
                 VStack(alignment: .center, spacing: 5) {
                     VStack(alignment: .center, spacing: 5) {
-                        Text(controller.currentSong.attributes.name)
-                            .bold()
-                            .multilineTextAlignment(.center)
+                        if let rating = controller.currentSong.attributes.contentRating?.capitalized {
+                            HStack(spacing: 3) {
+                                Text(controller.currentSong.attributes.name)
+                                    .bold()
+                                Text("(\(rating))")
+                            }.multilineTextAlignment(.center)
+                        } else {
+                            Text(controller.currentSong.attributes.name)
+                                .bold()
+                                .multilineTextAlignment(.center)
+                        }
+                        
                         Text(controller.currentSong.attributes.artistName)
                             .fontWeight(.light)
                             .multilineTextAlignment(.center)

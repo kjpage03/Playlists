@@ -33,10 +33,12 @@ struct PlaylistView: View {
             
             HStack() {
                 if let description = playlist.description {
-                    VStack {
-                        Text(description)
+                    VStack(alignment: .leading) {
                         PlaylistControls()
                             .padding()
+                        Text(description)
+                            .fontWeight(.light)
+                            .padding(.horizontal)
                     }
                 } else {
                     PlaylistControls()
@@ -57,11 +59,19 @@ struct PlaylistView: View {
             
             
             if let songs = playlist.songs {
-                ScrollView {
+                List {
                     ForEach(songs) { song in
                         SongRow(song: song)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
                     }.onDelete(perform: { indexSet in
-                        print("")
+                        
+                        for (index, item) in playlistController.items.enumerated() {
+                            if self.playlist.id == item.id {
+                                playlistController.items[index].songs?.remove(atOffsets: indexSet)
+                            }
+                        }
+                        
                     })
                 }
                 

@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SearchController {
     
+    var isNextPage: Bool = false
+    var limit: Int?
     
     func search(term: String, completionHandler: @escaping ([Song]) -> Void) {
         let searchTerm = term.lowercased()
@@ -23,7 +25,7 @@ struct SearchController {
                 
         components.queryItems = [
             URLQueryItem(name: "term", value: searchTerm),
-            URLQueryItem(name: "limit", value: "25"),
+            URLQueryItem(name: isNextPage ? "offset" : "limit", value: limit == nil ? "25" : String(limit!)),
             URLQueryItem(name: "types", value: "songs"),
         ]
 

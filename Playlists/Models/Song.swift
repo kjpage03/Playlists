@@ -51,7 +51,7 @@ struct Attributes: Codable {
 //    var previews: [Preview]
 //    var releaseDate: String
 //    var trackNumber: Int
-    
+    var contentRating: String?
     var url: String?
     var durationInMillis: Int
 }

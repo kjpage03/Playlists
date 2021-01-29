@@ -16,6 +16,8 @@ struct SearchView: View {
     @State var showOptions: Bool = false
     @State var selection: String? = nil
     @State var listShowing = false
+    @State var backButtonDisabled = true
+    @State var nextButtonDisabled = false
     var backButtonHidden: Bool
     //@State var nextClicked: Bool = false
     
@@ -45,6 +47,7 @@ struct SearchView: View {
                                 .onTapGesture {
                                     self.controller.items.removeAll()
                                     self.controller.items.insert(song, at: 0)
+                                    self.controller.refreshMusicPlayer()
                                     self.controller.musicPlayer.stop()
                                     self.controller.musicPlayer.prepareToPlay()
                                     self.controller.musicPlayer.play()
@@ -62,20 +65,62 @@ struct SearchView: View {
                         }
                     }
                     
-                    //if showNext {
-                    /*HStack {
-                     Spacer()
-                     Button(action: {
-                     //nextClicked = true
-                     }, label: {
-                     Next()
-                     })
-                     .frame(width: 100, height: 100, alignment: .center)
-                     
-                     Spacer()
-                     }*/
-                    //}
-                    
+//                    HStack {
+//                        Button(action: {
+//                            //previous page
+//                        }, label: {
+//                            Text("Back")
+//                                .foregroundColor(backButtonDisabled ? .gray : .blue)
+//                        })
+//                        .padding(.leading)
+//                        .disabled(backButtonDisabled)
+//                        .onTapGesture {
+//                            backButtonDisabled = true
+//                            nextButtonDisabled = false
+//                            let searchController = SearchController()
+//                            searchController.search(term: searches.items.reversed().first!.name) { (songs) in
+//                                self.songs = songs
+//                            }
+//                        }
+//                        Spacer()
+//                        Button(action: {
+//                            //next page
+//                        }, label: {
+//                            Text("Next")
+//                                .foregroundColor(.blue)
+//                        })
+//                        .padding(.trailing)
+//                        .onTapGesture {
+//                            backButtonDisabled = false
+//                            nextButtonDisabled = true
+//                            var searchController = SearchController()
+//                            searchController.isNextPage = true
+//                            searchController.search(term: searches.items.reversed().first!.name) { (songs) in
+//                                self.songs = songs
+//                            }
+//                        }
+//                    }
+                    Button(action: {
+                        
+                    }, label: {
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Text("More")
+                                Image(systemName: "chevron.down")
+                            }
+                            .foregroundColor(.blue)
+                            Spacer()
+                        }
+                        
+                    })
+                    .onTapGesture {
+                        var searchController = SearchController()
+                        searchController.limit = 50
+                        searchController.search(term: searches.items.reversed().first!.name) { (songs) in
+                            self.songs = songs
+                        }
+                    }
                 }
                 
             }

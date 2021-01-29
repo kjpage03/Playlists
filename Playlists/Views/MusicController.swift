@@ -12,7 +12,7 @@ import Combine
 
 class MusicController: ObservableObject {
     
-    @Published var items = [Song(id: "1440879551", type: "songs", attributes: Attributes(albumName: "Blue Album", artistName: "Weezer", artwork: Artwork(height: 1000, width: 1000, url: "https://images-na.ssl-images-amazon.com/images/I/71nYpz%2B%2BVCL._SL1400_.jpg"), name: "Say It Ain't So", url: "", durationInMillis: 259000))] {
+    @Published var items = [Playlist.testSong] {
         didSet {
             //            refreshMusicPlayer()
         }
