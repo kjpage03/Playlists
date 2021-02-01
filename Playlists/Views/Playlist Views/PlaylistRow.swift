@@ -23,7 +23,7 @@ struct PlaylistRow: View {
                         .aspectRatio(contentMode: .fit)
                         .clipShape(Circle())
                         .shadow(radius: 5)
-                        .overlay(Circle().stroke(Color.black, lineWidth: 0.5))
+//                        .overlay(Circle().stroke(Color.black, lineWidth: 0.5))
 
                 }
                 

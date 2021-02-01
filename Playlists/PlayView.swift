@@ -12,6 +12,11 @@ import Combine
 
 struct PlayView: View {
     
+    //MARK: TODO: Fix options on the search view
+    //MARK: TODO: Fix playlist revision text fields
+    //MARK: TODO: Research importing playlists
+    //MARK: TODO: Searching albums?
+    
     @State var currentTime: TimeInterval = 0
     @State var timeElapsed: String = "0:00"
     @State var timeRemaining: String = "0:00"
@@ -70,6 +75,7 @@ struct PlayView: View {
                 self.isPlaying
             }, set: {
                 self.isPlaying = $0
+                
                 if self.isPlaying {
                     self.controller.musicPlayer.stop()
                 } else {
@@ -112,7 +118,6 @@ struct PlayView: View {
             },
             set: {
                 self.currentTime = $0
-                
                 controller.musicPlayer.stop()
                 controller.musicPlayer.currentPlaybackTime = self.currentTime
                 controller.musicPlayer.prepareToPlay()

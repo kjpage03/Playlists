@@ -12,6 +12,7 @@ struct PlayControl: View {
     @Binding var isPaused: Bool
     @Binding var didSkip: Bool
     @Binding var didGoBack: Bool
+    @EnvironmentObject var controller: MusicController
     
     var body: some View {
         
@@ -33,15 +34,26 @@ struct PlayControl: View {
             Button(action: {
                 
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    self.isPaused.toggle()
+                    
+//                    self.isPaused.toggle()
+
+                    if controller.musicPlayer.playbackState == .paused {
+                        self.isPaused = false
+                    } else if controller.musicPlayer.playbackState == .playing {
+                        self.isPaused = true
+                    }
                     
                 }
 
                 //pause/play
                 
             }) {
-                Image(isPaused ? "Play" : "Pause")
-                    .scaleEffect(isPaused ? CGSize(width: 0.18, height: 0.18) : CGSize(width: 0.23, height: 0.23))
+//                Image(isPaused ? "Play" : "Pause")
+//                    .scaleEffect(isPaused ? CGSize(width: 0.18, height: 0.18) : CGSize(width: 0.23, height: 0.23))
+//                        .padding(-200)
+                
+                Image(controller.musicPlayer.playbackState == .paused ? "Play" : "Pause")
+                    .scaleEffect(controller.musicPlayer.playbackState == .paused ? CGSize(width: 0.18, height: 0.18) : CGSize(width: 0.23, height: 0.23))
                         .padding(-200)
                         
             }

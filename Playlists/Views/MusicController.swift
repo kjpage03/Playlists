@@ -46,13 +46,16 @@ class MusicController: ObservableObject {
         if items.count > 0 {
             
             //set up the queue
-            refreshMusicPlayer()
-            
-            musicPlayer.stop()
-            musicPlayer.prepareToPlay()
-            musicPlayer.play()
+            play()
         }
         
+    }
+    
+    func play() {
+        refreshMusicPlayer()
+        musicPlayer.stop()
+        musicPlayer.prepareToPlay()
+        musicPlayer.play()
     }
     
     func refreshMusicPlayer() {

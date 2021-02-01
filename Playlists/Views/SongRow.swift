@@ -16,6 +16,7 @@ struct SongRow: View {
     @State var showOptions = false
     @EnvironmentObject var controller: MusicController
     @State var isInQueue = false
+    var showsButton: Bool
     
     var song: Song
     
@@ -49,36 +50,37 @@ struct SongRow: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    //Back
-                    //                withAnimation(.easeInOut) {
-                    //                    optionsShowing.toggle()
-                    //                }
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        showOptions.toggle()
+                if showsButton {
+                    Button(action: {
+                        //Back
+                        //                withAnimation(.easeInOut) {
+                        //                    optionsShowing.toggle()
+                        //                }
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            showOptions.toggle()
+                            
+                        }
+                    }) {
+                        
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.gray)
+                            .imageScale(.medium)
+                            .rotationEffect(.degrees(showOptions ? 270 : 0))
+                            .animation(.easeInOut)
                         
                     }
-                }) {
-                    
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.gray)
-                        .imageScale(.medium)
-                        .rotationEffect(.degrees(showOptions ? 270 : 0))
-                        .animation(.easeInOut)
-                    
-                }
-                .frame(width: 40, height: 50, alignment: .center)
-                .onTapGesture {
-                    
-                    withAnimation(.easeInOut(duration: 0.3)) {
+                    .frame(width: 40, height: 50, alignment: .center)
+                    .onTapGesture {
                         
-                        showOptions.toggle()
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            
+                            showOptions.toggle()
+                            
+                        }
+                        
                         
                     }
-                    
-                    
                 }
-                
                 //close the other option view if another opens
                 
             }

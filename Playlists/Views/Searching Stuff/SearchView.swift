@@ -42,15 +42,12 @@ struct SearchView: View {
                     ForEach(songs ?? [Song]()) { song in
                         ZStack {
                             
-                            SongRow(song: song)
+                            SongRow(showsButton: true, song: song)
                                 .padding(5)
                                 .onTapGesture {
                                     self.controller.items.removeAll()
                                     self.controller.items.insert(song, at: 0)
-                                    self.controller.refreshMusicPlayer()
-                                    self.controller.musicPlayer.stop()
-                                    self.controller.musicPlayer.prepareToPlay()
-                                    self.controller.musicPlayer.play()
+                                    self.controller.play()
                                     self.selection = song.id
                                 }
                             

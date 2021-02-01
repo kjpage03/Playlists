@@ -11,6 +11,8 @@ struct PlaylistView: View {
     
     var playlist: Playlist
     @EnvironmentObject var playlistController: PlaylistController
+    @EnvironmentObject var controller: MusicController
+    @State var selection: String? = nil
     @State var editShowing = false
     var defaultImage = UIImage(named: "gray-square")
     
@@ -34,14 +36,14 @@ struct PlaylistView: View {
             HStack() {
                 if let description = playlist.description {
                     VStack(alignment: .leading) {
-                        PlaylistControls()
+                        PlaylistControls(playlist: playlist)
                             .padding()
                         Text(description)
                             .fontWeight(.light)
                             .padding(.horizontal)
                     }
                 } else {
-                    PlaylistControls()
+                    PlaylistControls(playlist: playlist)
                         .padding()
                 }
                 
@@ -61,9 +63,31 @@ struct PlaylistView: View {
             if let songs = playlist.songs {
                 List {
                     ForEach(songs) { song in
-                        SongRow(song: song)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
+//                        SongRow(showsButton: false, song: song)
+//                            .padding(.horizontal, 10)
+//                            .padding(.vertical, 5)
+                        
+                        ZStack {
+                            
+                            SongRow(showsButton: false, song: song)
+                                .padding(5)
+                                .onTapGesture {
+                                    self.controller.items.removeAll()
+                                    self.controller.items.insert(song, at: 0)
+                                    self.controller.play()
+                                    self.selection = song.id
+                                }
+                            
+                            NavigationLink(destination: PlayView(), tag: song.id,selection: $selection) {
+                                //SongRow(song: song)
+                                //.padding(5)
+                                EmptyView()
+                            }
+                            .opacity(0)
+                            .buttonStyle(PlainButtonStyle())
+                            
+                        }
+                        
                     }.onDelete(perform: { indexSet in
                         
                         for (index, item) in playlistController.items.enumerated() {
