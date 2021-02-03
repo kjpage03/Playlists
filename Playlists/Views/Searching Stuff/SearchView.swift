@@ -18,6 +18,7 @@ struct SearchView: View {
     @State var listShowing = false
     @State var backButtonDisabled = true
     @State var nextButtonDisabled = false
+    @State var specialID = String()
     var backButtonHidden: Bool
     //@State var nextClicked: Bool = false
     
@@ -29,6 +30,7 @@ struct SearchView: View {
     var body: some View {
         
         VStack {
+            
             SearchBar(songs: $songs, listShowing: $listShowing)
             
             if searches.items.count > 0 && !listShowing {
@@ -42,11 +44,12 @@ struct SearchView: View {
                     ForEach(songs ?? [Song]()) { song in
                         ZStack {
                             
-                            SongRow(showsButton: true, song: song)
+                            SongRow(specialID: $specialID, showsButton: true, song: song)
                                 .padding(5)
                                 .onTapGesture {
                                     self.controller.items.removeAll()
                                     self.controller.items.insert(song, at: 0)
+                                    //insert song before current song in queue
                                     self.controller.play()
                                     self.selection = song.id
                                 }

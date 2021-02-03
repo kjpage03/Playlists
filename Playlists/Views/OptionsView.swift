@@ -12,38 +12,45 @@ struct OptionsView: View {
     @EnvironmentObject var controller: MusicController
     @State var playlistsPresented = false
     @State var queueTapped = false
-        
+    
     var song: Song
     
     @State var isInQueue = false
     
     var body: some View {
-        GroupBox {
-            Text("\(Image(systemName: "music.note.list")) Add to Playlist")
-                .onTapGesture {
-                    playlistsPresented = true
-                }
-                .sheet(isPresented: $playlistsPresented, content: {
-                    
-                    AddToPlaylistsView(song: song, isPresented: $playlistsPresented)
-                    
-                })
+        
+        VStack(spacing: 0) {
+            GroupBox {
+                
+                Text("\(Image(systemName: "music.note.list")) Add to Playlist")
+                    .frame(maxWidth: .infinity)
+            }
+            .onTapGesture {
+                playlistsPresented = true
+            }
+            .sheet(isPresented: $playlistsPresented, content: {
+                
+                AddToPlaylistsView(song: song, isPresented: $playlistsPresented)
+                
+            })
             
             Divider()
             
-            Text("\(Image(systemName: "list.number")) Add to Queue")
-                .onTapGesture {
-//                    controller.items.removeAll()
-//                    controller.items.append(song)
-                    isInQueue = true
-                    controller.newItem = song
-//                    controller.refreshMusicPlayer()
-//                    print("NEW QUEUE: \(controller.items)")
-                }
-                .opacity(isInQueue ? 0.5 : 1.0)
-                .disabled(isInQueue)
-                .animation(.easeIn)
+            GroupBox {
+                Text("\(Image(systemName: "list.number")) Add to Queue")
+                    .frame(maxWidth: .infinity)
+                    .opacity(isInQueue ? 0.5 : 1.0)
+                    .disabled(isInQueue)
+                    .animation(.easeIn)
+            }
+            .onTapGesture {
+                
+                isInQueue = true
+                controller.newItem = song
+                
+            }
         }
+        
         .onAppear(perform: {
             for song in controller.items {
                 if song.id == self.song.id {
@@ -57,6 +64,6 @@ struct OptionsView: View {
 struct OptionsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        OptionsView(song: Playlist.testSong)
+        OptionsView(song: Playlist.testSong).environmentObject(MusicController())
     }
 }

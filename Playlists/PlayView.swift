@@ -12,10 +12,13 @@ import Combine
 
 struct PlayView: View {
     
-    //MARK: TODO: Fix options on the search view
-    //MARK: TODO: Fix playlist revision text fields
     //MARK: TODO: Research importing playlists
     //MARK: TODO: Searching albums?
+    //MARK: TODO: More button on search view
+    //MARK: TODO: Text on the option buttons
+    //MARK: TODO: Touch up the slider
+    //MARK: TODO: Playlist create/edit
+    //Other - Dark mode, constraints
     
     @State var currentTime: TimeInterval = 0
     @State var timeElapsed: String = "0:00"
@@ -166,11 +169,7 @@ struct PlayView: View {
                 VStack(alignment: .center, spacing: 5) {
                     VStack(alignment: .center, spacing: 5) {
                         if let rating = controller.currentSong.attributes.contentRating?.capitalized {
-                            HStack(spacing: 3) {
-                                Text(controller.currentSong.attributes.name)
-                                    .bold()
-                                Text("(\(rating))")
-                            }.multilineTextAlignment(.center)
+                                Text(controller.currentSong.attributes.name).bold() + Text(" (\(rating))")
                         } else {
                             Text(controller.currentSong.attributes.name)
                                 .bold()
@@ -199,7 +198,6 @@ struct PlayView: View {
                 .navigationBarItems(
                     
                     leading:
-                        
                         NavigationLink(destination: SearchView(songs: nil, backButtonHidden: false)) {
                             Image("Search")
                                 .scaleEffect(CGSize(width: 0.2, height: 0.2))

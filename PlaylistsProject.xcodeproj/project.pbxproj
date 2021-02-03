@@ -25,6 +25,7 @@
 		1E85D20F25C23D0600015921 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D20E25C23D0600015921 /* SearchController.swift */; };
 		1E85D24725C46D3300015921 /* AddToPlaylistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D24625C46D3200015921 /* AddToPlaylistsView.swift */; };
 		1E85D25225C46E0A00015921 /* PlaylistRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D25125C46E0A00015921 /* PlaylistRep.swift */; };
+		1E87269525C9BDA5002809E0 /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E87269425C9BDA5002809E0 /* ThemesView.swift */; };
 		1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */; };
 		1EC0D97225905F0400C4A3F6 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */; };
 		1EC0D97725905F2400C4A3F6 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97625905F2400C4A3F6 /* Playlist.swift */; };
@@ -87,6 +88,7 @@
 		1E85D20E25C23D0600015921 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		1E85D24625C46D3200015921 /* AddToPlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToPlaylistsView.swift; sourceTree = "<group>"; };
 		1E85D25125C46E0A00015921 /* PlaylistRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistRep.swift; sourceTree = "<group>"; };
+		1E87269425C9BDA5002809E0 /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
 		1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		1EC0D97625905F2400C4A3F6 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
@@ -103,7 +105,7 @@
 		1EF48560258BAAA50042F940 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EF48563258BAAA50042F940 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1EF48565258BAAA50042F940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1EF4856A258BAAA50042F940 /* PlaylistsProjectlaylistsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaylistsProjectlaylistsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EF4856A258BAAA50042F940 /* PlaylistsProject.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaylistsProject.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF4856E258BAAA50042F940 /* PlaylistsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsTests.swift; sourceTree = "<group>"; };
 		1EF48570258BAAA50042F940 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EF48575258BAAA50042F940 /* PlaylistsProjectlaylistsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaylistsProjectlaylistsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,14 +176,15 @@
 			isa = PBXGroup;
 			children = (
 				1E5901D625B0AB2D00580162 /* MusicController.swift */,
+				1E87269425C9BDA5002809E0 /* ThemesView.swift */,
 				1EF4858A258BAEBB0042F940 /* PlaybackCtrls.swift */,
-				1EC0D97B25906FA300C4A3F6 /* SongRow.swift */,
 				1E85D24625C46D3200015921 /* AddToPlaylistsView.swift */,
 				1E85D25125C46E0A00015921 /* PlaylistRep.swift */,
 				1E85D1E825C1CF9600015921 /* OptionsView.swift */,
 				1E6460F625A1404D0073FED1 /* ImageLoader.swift */,
 				1E64610A25A3795C0073FED1 /* ImageView.swift */,
 				1E5CA9D425A8B116000778F4 /* Next.swift */,
+				1EC0D97B25906FA300C4A3F6 /* SongRow.swift */,
 				1E758D0E25BA585D005FFCF8 /* Playlist Views */,
 				1E85D22725C30E6B00015921 /* Searching Stuff */,
 			);
@@ -235,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				1EF48559258BAAA40042F940 /* Playlists.app */,
-				1EF4856A258BAAA50042F940 /* PlaylistsProjectlaylistsTests.xctest */,
+				1EF4856A258BAAA50042F940 /* PlaylistsProject.xctest */,
 				1EF48575258BAAA50042F940 /* PlaylistsProjectlaylistsUITests.xctest */,
 			);
 			name = Products;
@@ -323,7 +326,7 @@
 			);
 			name = PlaylistsProjectlaylistsTests;
 			productName = PlaylistsTests;
-			productReference = 1EF4856A258BAAA50042F940 /* PlaylistsProjectlaylistsTests.xctest */;
+			productReference = 1EF4856A258BAAA50042F940 /* PlaylistsProject.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		1EF48574258BAAA50042F940 /* PlaylistsProjectlaylistsUITests */ = {
@@ -439,6 +442,7 @@
 				1E85D24725C46D3300015921 /* AddToPlaylistsView.swift in Sources */,
 				1EC0D9B0259BA8AA00C4A3F6 /* Token.swift in Sources */,
 				1E5901C925AF604100580162 /* VolumeSlider.swift in Sources */,
+				1E87269525C9BDA5002809E0 /* ThemesView.swift in Sources */,
 				1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */,
 				1E5901D725B0AB2D00580162 /* MusicController.swift in Sources */,
 				1E758D2825BF2D22005FFCF8 /* PlaylistEditor.swift in Sources */,
@@ -667,7 +671,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlaylistsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PlaylistsProject;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PlaylistsProjectRODUCTS_DIR)/PlaylistsProjectlaylists.app/PlaylistsProjectlaylists";
@@ -689,7 +693,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.PlaylistsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PlaylistsProject;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PlaylistsProjectRODUCTS_DIR)/PlaylistsProjectlaylists.app/PlaylistsProjectlaylists";

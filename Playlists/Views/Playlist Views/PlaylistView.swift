@@ -14,6 +14,7 @@ struct PlaylistView: View {
     @EnvironmentObject var controller: MusicController
     @State var selection: String? = nil
     @State var editShowing = false
+    @State var specialID = String()
     var defaultImage = UIImage(named: "gray-square")
     
     var body: some View {
@@ -69,7 +70,7 @@ struct PlaylistView: View {
                         
                         ZStack {
                             
-                            SongRow(showsButton: false, song: song)
+                            SongRow(specialID: $specialID, showsButton: false, song: song)
                                 .padding(5)
                                 .onTapGesture {
                                     self.controller.items.removeAll()

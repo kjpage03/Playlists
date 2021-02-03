@@ -16,6 +16,7 @@ struct SongRow: View {
     @State var showOptions = false
     @EnvironmentObject var controller: MusicController
     @State var isInQueue = false
+    @Binding var specialID: String
     var showsButton: Bool
     
     var song: Song
@@ -32,15 +33,9 @@ struct SongRow: View {
                 VStack(alignment: .leading) {
                     
                     if let rating = song.attributes.contentRating?.capitalized {
-                        Text("\(song.attributes.name) (\(rating)")
-                        HStack(spacing: 3) {
-                            Text(song.attributes.name)
-                                .bold()
-                            Text("(\(rating))")
-                        }
+                        Text(song.attributes.name).bold() + Text(" (\(rating))")
                     } else {
-                        Text(song.attributes.name)
-                            .bold()
+                        Text(song.attributes.name).bold()
                     }
                     
                     Text("\(song.attributes.artistName) - \(song.attributes.albumName)")
@@ -57,37 +52,40 @@ struct SongRow: View {
                         //                    optionsShowing.toggle()
                         //                }
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            showOptions.toggle()
-                            
+//                            showOptions.toggle()
+                            if specialID != song.id {
+                                specialID = song.id
+                            } else {
+                                specialID = String()
+                            }
                         }
                     }) {
                         
                         Image(systemName: "chevron.left")
                             .foregroundColor(.gray)
                             .imageScale(.medium)
-                            .rotationEffect(.degrees(showOptions ? 270 : 0))
+                            .rotationEffect(.degrees(specialID == song.id ? 270 : 0))
                             .animation(.easeInOut)
                         
                     }
                     .frame(width: 40, height: 50, alignment: .center)
                     .onTapGesture {
-                        
+                                                
                         withAnimation(.easeInOut(duration: 0.3)) {
                             
-                            showOptions.toggle()
+                            if specialID != song.id {
+                                specialID = song.id
+                            } else {
+                                specialID = String()
+                            }
                             
                         }
-                        
-                        
                     }
                 }
-                //close the other option view if another opens
-                
             }
-            if showOptions {
-                
+            
+            if specialID == song.id {
                 OptionsView(song: song)
-                
             }
         }
     }
