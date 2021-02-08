@@ -15,19 +15,20 @@ struct PlayView: View {
     //MARK: TODO: Research importing playlists
     //MARK: TODO: Searching albums?
     //MARK: TODO: More button on search view
-    //MARK: TODO: Text on the option buttons
     //MARK: TODO: Touch up the slider
     //MARK: TODO: Playlist create/edit
-    //Other - Dark mode, constraints
+    //Other - Constraints
     
     @State var currentTime: TimeInterval = 0
     @State var timeElapsed: String = "0:00"
     @State var timeRemaining: String = "0:00"
-    
     @State var isPlaying: Bool = false
     @State var didSkip: Bool = false
     @State var didBack: Bool = false
     @State var showQueue: Bool = false
+    @State var queuePresented: Bool = false
+        
+    @Environment(\.colorScheme) var colorScheme
     
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     
@@ -121,7 +122,7 @@ struct PlayView: View {
             },
             set: {
                 self.currentTime = $0
-                controller.musicPlayer.stop()
+//                controller.musicPlayer.stop()
                 controller.musicPlayer.currentPlaybackTime = self.currentTime
                 controller.musicPlayer.prepareToPlay()
                 if !self.isPlaying {
@@ -135,7 +136,7 @@ struct PlayView: View {
         NavigationView() {
             
             VStack(alignment: .center, spacing: 20) {
-                
+//                Spacer()
                 ImageView(withURL: controller.currentSong.attributes.artwork.url, height: controller.currentSong.attributes.artwork.height, width: controller.currentSong.attributes.artwork.width, frameHeight: 290, frameWidth: 290)
                     //.clipShape(Circle())
                     .shadow(radius: 10)
@@ -151,7 +152,7 @@ struct PlayView: View {
                         .fontWeight(.light)
                         .padding()
                         .onReceive(timer, perform: { _ in
-                            
+                                                        
                             updateElapsedTime()
                             
                             updateRemainingTime()
@@ -184,6 +185,7 @@ struct PlayView: View {
                     PlayControl(isPaused: isPaused, didSkip: skipped, didGoBack: didGoBack)
                         //.offset(x: 0, y: -50)
                         .offset(x: 0, y: 0)
+
                 }
                 .offset(x: 0, y: -60)
                 
@@ -195,11 +197,38 @@ struct PlayView: View {
                 //                        .scaleEffect(CGSize(width: 2.0, height: 2.0))
                 //                })
                 
+//                VStack {
+//                HStack(spacing: 150) {
+//
+//                    Button(action: {
+//
+//                    }, label: {
+//                        Image(systemName: "paintbrush.fill")
+//                            .foregroundColor(.black)
+//                    })
+//                    .scaleEffect(CGSize(width: 2.0, height: 2.0))
+//
+//                Button(action: {
+//                    queuePresented = true
+//                }, label: {
+//                    Image(systemName: "list.number")
+//                        .foregroundColor(.black)
+//                })
+//                .scaleEffect(CGSize(width: 2.0, height: 2.0))
+//                .sheet(isPresented: $queuePresented, content: {
+//                    QueueView()
+//                })
+//                }
+
+//                }
+
                 .navigationBarItems(
                     
                     leading:
                         NavigationLink(destination: SearchView(songs: nil, backButtonHidden: false)) {
                             Image("Search")
+                                .renderingMode(.template)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                                 .scaleEffect(CGSize(width: 0.2, height: 0.2))
                                 .frame(width: 50, height: 50, alignment: .center)},
                     
@@ -207,9 +236,13 @@ struct PlayView: View {
                         
                         NavigationLink(destination: PlaylistsView()) {
                             Image("List")
+                                .renderingMode(.template)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                                 .scaleEffect(CGSize(width: 0.09, height: 0.09))
                                 .frame(width: 50, height: 50, alignment: .center)
                         })
+                
+                
             }
             .offset(x: 0, y: -55)
             //increases, down; decreases, up

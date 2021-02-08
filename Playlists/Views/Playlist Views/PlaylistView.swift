@@ -16,129 +16,140 @@ struct PlaylistView: View {
     @State var editShowing = false
     @State var specialID = String()
     var defaultImage = UIImage(named: "gray-square")
+    @EnvironmentObject var themeController: ThemeController
     
     var body: some View {
         
-        VStack {
+        ZStack {
+            Color(playlist.theme.bgColor.uiColor)
+                .ignoresSafeArea()
             
-            HStack() {
-                Spacer()
-                if let image = playlist.image {
+            VStack {
+                HStack() {
+                    Spacer()
+                    if let image = playlist.image {
+                        Image(uiImage: (UIImage(data: image) ?? defaultImage!))
+                            .resizable()
+                            .frame(width: 115, height: 115)
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                            .offset(x: 0, y: 15)
+                    }
                     
-                    Image(uiImage: (UIImage(data: image) ?? defaultImage!))
-                        .resizable()
-                        .frame(width: 115, height: 115)
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                        .offset(x: 0, y: 15)
-                }
-            }.frame(width: 350, height: 0)
-            
-            HStack() {
-                if let description = playlist.description {
-                    VStack(alignment: .leading) {
+                }.frame(width: 350, height: 0)
+                
+                HStack() {
+                    if let description = playlist.description {
+                        VStack(alignment: .leading) {
+                            PlaylistControls(playlist: playlist)
+                                .padding()
+                            Text(description)
+                                .fontWeight(.light)
+                                .padding(.horizontal)
+                        }
+                    } else {
                         PlaylistControls(playlist: playlist)
                             .padding()
-                        Text(description)
-                            .fontWeight(.light)
-                            .padding(.horizontal)
                     }
-                } else {
-                    PlaylistControls(playlist: playlist)
-                        .padding()
+                    
+                    Spacer()
                 }
                 
-                Spacer()
-                //                        if let image = playlist.image {
-                //
-                //                                Image(uiImage: (UIImage(data: image) ?? defaultImage!))
-                //                                    .resizable()
-                //                                    .frame(width: 150, height: 150)
-                //                                    .aspectRatio(contentMode: .fit)
-                //                                    .clipShape(Circle())
-                //
-                //                        }
-            }
-            
-            
-            if let songs = playlist.songs {
-                List {
-                    ForEach(songs) { song in
-//                        SongRow(showsButton: false, song: song)
-//                            .padding(.horizontal, 10)
-//                            .padding(.vertical, 5)
-                        
-                        ZStack {
+                if let songs = playlist.songs {
+                    
+                    //                    ZStack {
+                    List {
+                        ForEach(songs) { song in
                             
-                            SongRow(specialID: $specialID, showsButton: false, song: song)
-                                .padding(5)
-                                .onTapGesture {
-                                    self.controller.items.removeAll()
-                                    self.controller.items.insert(song, at: 0)
-                                    self.controller.play()
-                                    self.selection = song.id
+                            ZStack {
+                                
+                                SongRow(specialID: $specialID, showsButton: false, song: song)
+                                    .padding(5)
+                                    //                                .foregroundColor(.red)
+                                    //                                .background(Color.red)
+                                    .onTapGesture {
+                                        self.controller.items.removeAll()
+                                        self.controller.items.insert(song, at: 0)
+                                        self.controller.play()
+                                        self.selection = song.id
+                                    }
+                                
+                                NavigationLink(destination: PlayView(), tag: song.id,selection: $selection) {
+                                    //SongRow(song: song)
+                                    //.padding(5)
+                                    EmptyView()
                                 }
-                            
-                            NavigationLink(destination: PlayView(), tag: song.id,selection: $selection) {
-                                //SongRow(song: song)
-                                //.padding(5)
-                                EmptyView()
+                                .opacity(0)
+                                .buttonStyle(PlainButtonStyle())
+                                
                             }
-                            .opacity(0)
-                            .buttonStyle(PlainButtonStyle())
                             
                         }
-                        
-                    }.onDelete(perform: { indexSet in
-                        
-                        for (index, item) in playlistController.items.enumerated() {
-                            if self.playlist.id == item.id {
-                                playlistController.items[index].songs?.remove(atOffsets: indexSet)
+                        .onDelete(perform: { indexSet in
+                            
+                            for (index, item) in playlistController.items.enumerated() {
+                                if self.playlist.id == item.id {
+                                    playlistController.items[index].songs?.remove(atOffsets: indexSet)
+                                }
                             }
-                        }
+                            
+                        })
+                        .listRowBackground(Color(playlist.theme.bgColor.uiColor))
                         
-                    })
-                }
-                
-                .navigationBarTitle(playlist.name, displayMode: .large)
-                .navigationBarItems(trailing: Button(action: {
-                    print("Edit icon pressed...")
-                    editShowing = true
-                }) {
-                    Image(systemName: "pencil").imageScale(.large)
-                })
-                .sheet(isPresented: $editShowing, content: {
-                    PlaylistEditor(playlist: playlist, editShowing: $editShowing)
-                })
-                
-            } else {
-                
-                VStack(spacing: 8) {
-                    
-                    NavigationLink(destination: SearchView(songs: nil, backButtonHidden: true)) {
-                        Image(systemName: "plus")
-                            .frame(width: 50, height: 50, alignment: .center)
-                            .scaleEffect(CGSize(width: 3, height: 3))
-                            .foregroundColor(.blue)
                     }
+                    .colorMultiply(Color(playlist.theme.bgColor.uiColor))
+                    .foregroundColor(Color(playlist.theme.acColor.uiColor))
                     
-                    Text("Add Songs")
-                        .fontWeight(.light)
+                    
+                    
+                    .navigationBarTitle(playlist.name, displayMode: .large)
+                    .navigationBarItems(trailing: Button(action: {
+                        print("Edit icon pressed...")
+                        editShowing = true
+                    }) {
+                        Image(systemName: "pencil").imageScale(.large)
+                    })
+                    .sheet(isPresented: $editShowing, content: {
+                        
+                        PlaylistEditor(playlist: playlist, editShowing: $editShowing)
+                    })
+                    
+                    //                        Color(playlist.theme.bgColor.uiColor)
+                    //                            .ignoresSafeArea()
+                    //                    }
+                    
+                    
+                } else {
+                    
+                    VStack(spacing: 8) {
+                        
+                        NavigationLink(destination: SearchView(songs: nil, backButtonHidden: true)) {
+                            Image(systemName: "plus")
+                                .frame(width: 50, height: 50, alignment: .center)
+                                .scaleEffect(CGSize(width: 3, height: 3))
+                                .foregroundColor(.blue)
+                        }
+                        
+                        Text("Add Songs")
+                            .fontWeight(.light)
+                    }
+                    .navigationBarTitle(Text(playlist.name), displayMode: .large)
+                    .navigationBarItems(trailing: Button(action: {
+                        print("Edit icon pressed...")
+                        editShowing = true
+                    }) {
+                        Image(systemName: "pencil").imageScale(.large)
+                    })
+                    .sheet(isPresented: $editShowing, content: {
+                        
+                        PlaylistEditor(playlist: playlist, editShowing: $editShowing)
+                    })
+                    
                 }
-                .navigationBarTitle(playlist.name, displayMode: .large)
-                .navigationBarItems(trailing: Button(action: {
-                    print("Edit icon pressed...")
-                    editShowing = true
-                }) {
-                    Image(systemName: "pencil").imageScale(.large)
-                })
-                .sheet(isPresented: $editShowing, content: {
-                    PlaylistEditor(playlist: playlist, editShowing: $editShowing)
-                })
                 
             }
-            
         }
+
         
     }
 }

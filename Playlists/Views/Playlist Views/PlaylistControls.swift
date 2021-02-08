@@ -12,6 +12,7 @@ struct PlaylistControls: View {
     @EnvironmentObject var controller: MusicController
     @State var playIsActive = false
     @State var shuffleIsActive = false
+    @Environment(\.colorScheme) var colorScheme
     var playlist: Playlist
     
     var body: some View {
@@ -30,7 +31,7 @@ struct PlaylistControls: View {
                     }, label: {
                         ZStack {
                         Image(systemName: "play.fill")
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .scaleEffect(CGSize(width: 1.5, height: 1.5))
                             .opacity(0.8)
                         Circle()
@@ -56,7 +57,7 @@ struct PlaylistControls: View {
                 }, label: {
                     ZStack {
                     Image(systemName: "shuffle")
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         .scaleEffect(CGSize(width: 1.5, height: 1.5))
                         .opacity(0.8)
                         Circle()
@@ -73,7 +74,7 @@ struct PlaylistControls: View {
                 }, label: {
                     ZStack {
                     Image(systemName: "plus")
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         .scaleEffect(CGSize(width: 1.5, height: 1.5))
                         .opacity(0.8)
                         Circle()

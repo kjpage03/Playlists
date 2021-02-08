@@ -25,7 +25,10 @@
 		1E85D20F25C23D0600015921 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D20E25C23D0600015921 /* SearchController.swift */; };
 		1E85D24725C46D3300015921 /* AddToPlaylistsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D24625C46D3200015921 /* AddToPlaylistsView.swift */; };
 		1E85D25225C46E0A00015921 /* PlaylistRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E85D25125C46E0A00015921 /* PlaylistRep.swift */; };
-		1E87269525C9BDA5002809E0 /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E87269425C9BDA5002809E0 /* ThemesView.swift */; };
+		1E87269525C9BDA5002809E0 /* ThemeCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E87269425C9BDA5002809E0 /* ThemeCreator.swift */; };
+		1E8726B025CAF113002809E0 /* QueueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8726AF25CAF113002809E0 /* QueueView.swift */; };
+		1E8726B525CD8FAE002809E0 /* ThemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8726B425CD8FAE002809E0 /* ThemePicker.swift */; };
+		1E8726C025CDAC82002809E0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8726BF25CDAC82002809E0 /* Theme.swift */; };
 		1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */; };
 		1EC0D97225905F0400C4A3F6 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */; };
 		1EC0D97725905F2400C4A3F6 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC0D97625905F2400C4A3F6 /* Playlist.swift */; };
@@ -88,7 +91,10 @@
 		1E85D20E25C23D0600015921 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		1E85D24625C46D3200015921 /* AddToPlaylistsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToPlaylistsView.swift; sourceTree = "<group>"; };
 		1E85D25125C46E0A00015921 /* PlaylistRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistRep.swift; sourceTree = "<group>"; };
-		1E87269425C9BDA5002809E0 /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
+		1E87269425C9BDA5002809E0 /* ThemeCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCreator.swift; sourceTree = "<group>"; };
+		1E8726AF25CAF113002809E0 /* QueueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueView.swift; sourceTree = "<group>"; };
+		1E8726B425CD8FAE002809E0 /* ThemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePicker.swift; sourceTree = "<group>"; };
+		1E8726BF25CDAC82002809E0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1EC0D94D258D038F00C4A3F6 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		1EC0D97125905F0400C4A3F6 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		1EC0D97625905F2400C4A3F6 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
@@ -176,7 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				1E5901D625B0AB2D00580162 /* MusicController.swift */,
-				1E87269425C9BDA5002809E0 /* ThemesView.swift */,
+				1E87269425C9BDA5002809E0 /* ThemeCreator.swift */,
+				1E8726B425CD8FAE002809E0 /* ThemePicker.swift */,
+				1E8726AF25CAF113002809E0 /* QueueView.swift */,
 				1EF4858A258BAEBB0042F940 /* PlaybackCtrls.swift */,
 				1E85D24625C46D3200015921 /* AddToPlaylistsView.swift */,
 				1E85D25125C46E0A00015921 /* PlaylistRep.swift */,
@@ -196,6 +204,7 @@
 			children = (
 				1EC0D97625905F2400C4A3F6 /* Playlist.swift */,
 				1EF48605258BC0950042F940 /* Song.swift */,
+				1E8726BF25CDAC82002809E0 /* Theme.swift */,
 				1EC0D9BA259E58B500C4A3F6 /* JSONObjects.swift */,
 				1EC0D9AF259BA8AA00C4A3F6 /* Token.swift */,
 			);
@@ -431,18 +440,21 @@
 				1EC0D97725905F2400C4A3F6 /* Playlist.swift in Sources */,
 				1EC0D9BB259E58B500C4A3F6 /* JSONObjects.swift in Sources */,
 				1EF48601258BC07F0042F940 /* SearchViewController.swift in Sources */,
+				1E8726B025CAF113002809E0 /* QueueView.swift in Sources */,
 				1E64612B25A4EEC30073FED1 /* SetupViewController.swift in Sources */,
 				1EF485FC258BC0200042F940 /* SearchView.swift in Sources */,
 				1EC0D9862599A63B00C4A3F6 /* PlaylistRow.swift in Sources */,
 				1E85D20425C2283200015921 /* RecentSearchesView.swift in Sources */,
 				1EF4855F258BAAA40042F940 /* SubscriptionCheck.swift in Sources */,
+				1E8726B525CD8FAE002809E0 /* ThemePicker.swift in Sources */,
 				1EF4860B258BC0BE0042F940 /* SongTableViewCell.swift in Sources */,
 				1E85D1E925C1CF9600015921 /* OptionsView.swift in Sources */,
 				1E85D25225C46E0A00015921 /* PlaylistRep.swift in Sources */,
+				1E8726C025CDAC82002809E0 /* Theme.swift in Sources */,
 				1E85D24725C46D3300015921 /* AddToPlaylistsView.swift in Sources */,
 				1EC0D9B0259BA8AA00C4A3F6 /* Token.swift in Sources */,
 				1E5901C925AF604100580162 /* VolumeSlider.swift in Sources */,
-				1E87269525C9BDA5002809E0 /* ThemesView.swift in Sources */,
+				1E87269525C9BDA5002809E0 /* ThemeCreator.swift in Sources */,
 				1EC0D94E258D038F00C4A3F6 /* SearchButton.swift in Sources */,
 				1E5901D725B0AB2D00580162 /* MusicController.swift in Sources */,
 				1E758D2825BF2D22005FFCF8 /* PlaylistEditor.swift in Sources */,

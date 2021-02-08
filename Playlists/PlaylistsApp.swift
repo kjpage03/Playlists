@@ -18,7 +18,7 @@ struct PlaylistsApp: App {
     @ObservedObject var controller = MusicController()
     @ObservedObject var playlistController = PlaylistController()
     @ObservedObject var searches = RecentSearches()
-    
+    @ObservedObject var themeController = ThemeController()
 //    var queue = Queue()
     
     var body: some Scene {
@@ -34,7 +34,7 @@ struct PlaylistsApp: App {
             PlayView().environmentObject(controller)
                 .environmentObject(playlistController)
                 .environmentObject(searches)
-
+                .environmentObject(themeController)
             
             /*PlayView(hasSub: $hasSubscription)
                 .onReceive(checker.dataPublisher, perform: { hasSub in

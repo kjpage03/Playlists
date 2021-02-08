@@ -14,6 +14,7 @@ struct RecentSearchesView: View {
     @Binding var listShowing: Bool
     var searchController = SearchController()
     var exampleSearches = ["Weezer", "Asia", "Led Zeppelin", "REO Speedwagon"]
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -48,7 +49,7 @@ struct RecentSearchesView: View {
                     
                 }, label: {
                     Text(item.name)
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                 })
             }
             
